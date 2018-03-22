@@ -125,13 +125,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 30));
 
     var weatherFromCity = function weatherFromCity(city) {
-        return fetch('http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=6841e5450643e5d4ff59981dbf58944e').then(function (response) {
+        return fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=6841e5450643e5d4ff59981dbf58944e').then(function (response) {
             return response.json();
         });
     };
 
     var weatherFromCoord = function weatherFromCoord(lat, long) {
-        return fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + long + '&APPID=6841e5450643e5d4ff59981dbf58944e').then(function (response) {
+        return fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + long + '&APPID=6841e5450643e5d4ff59981dbf58944e').then(function (response) {
             return response.json();
         });
     };
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             cityLink.text = city.name + ', ' + city.country;
-            cityLink.href = 'http://www.google.com/maps/place/' + city.lat + ',' + city.long;
+            cityLink.href = 'https://www.google.com/maps/place/' + city.lat + ',' + city.long;
 
             return { day1: day1, day2: day2, day3: day3 };
         }).then(function (days) {
