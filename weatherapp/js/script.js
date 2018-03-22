@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var sun = document.querySelector('#bg-sun');
     var search = document.querySelector('#search');
+    var searchButton = document.querySelector('#searchButton');
     var day1Element = document.querySelector('#day1');
     var day2Element = document.querySelector('#day2');
     var day3Element = document.querySelector('#day3');
@@ -235,22 +236,30 @@ document.addEventListener('DOMContentLoaded', function () {
     //     })
     // })
 
+    var request = function request(city) {
+        getWeather(weatherFromCity(city)).then(function () {
+            window.scroll({
+                left: 0,
+                top: window.innerHeight,
+                behavior: "smooth"
+            });
+        }).catch(function (e) {
+            console.error("Weather", e);
+            search.parentElement.classList.add('shake');
+            setTimeout(function () {
+                search.parentElement.classList.remove('shake');
+            }, 1000);
+            loader.classList.add('hide');
+        });
+    };
+
+    searchButton.addEventListener('click', function (e) {
+        request(search.target.value);
+    });
+
     search.addEventListener('keydown', function (e) {
         if (e.keyCode == 13) {
-            getWeather(weatherFromCity(e.target.value)).then(function () {
-                window.scroll({
-                    left: 0,
-                    top: window.innerHeight,
-                    behavior: "smooth"
-                });
-            }).catch(function (e) {
-                console.error("Weather", e);
-                search.parentElement.classList.add('shake');
-                setTimeout(function () {
-                    search.parentElement.classList.remove('shake');
-                }, 1000);
-                loader.classList.add('hide');
-            });
+            request(e.target.value);
         }
     });
 
