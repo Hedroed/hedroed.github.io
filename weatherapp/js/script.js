@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     searchButton.addEventListener('click', function (e) {
-        request(search.target.value);
+        request(search.value);
     });
 
     search.addEventListener('keydown', function (e) {
